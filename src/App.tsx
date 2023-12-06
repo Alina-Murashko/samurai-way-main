@@ -1,43 +1,20 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
-import state from "./redax/state"
+import { BrowserRouter} from 'react-router-dom';
+import { Sidebar } from './layout/sidebar/Sidebar';
+import { Header } from './layout/header/Header';
+import { Content } from './layout/content/Content';
 
-function App() {
 
-  let a = state.dialogPage.message[0].message
-
+export function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        App Hello
-        <Route path={"/hello"} render={() => <HelloMessage message={a}/>} />
-        <Route path={"/bye"} render={() => <ByeMessage message={'Bye Samurai'}/>} />
+        <Header/>
+        <Sidebar/>
+        <Content/>
       </div>
     </BrowserRouter>
     
   );
 }
-
-
-type MessageType = {
-  message: string
-}
-
-function HelloMessage(props: MessageType) {
-  return (
-    <h1>{props.message}</h1>
-  )
-}
-
-
-function ByeMessage(props: MessageType) {
-  return (
-    <h1>{props.message}</h1>
-  )
-}
-
-
-
-
-export default App;

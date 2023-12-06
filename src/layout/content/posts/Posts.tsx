@@ -1,0 +1,13 @@
+import { Post } from "./post/Post"
+
+export const Posts : React.FC = () => {
+    return (
+        <div>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+        </div>
+    )
+}
