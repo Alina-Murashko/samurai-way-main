@@ -1,0 +1,11 @@
+
+.app_wrapper {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 100px 1fr;
+  grid-template-areas: 
+  "item_header item_header item_header"
+  "item_sidebar item_content item_content";
+  gap: 10px;
+}

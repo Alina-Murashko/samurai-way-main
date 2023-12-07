@@ -1,0 +1,8 @@
+.header {
+    background-color: plum;
+    grid-area: item_header;
+    & img {
+        width: 100px;
+      }
+  }
+ 

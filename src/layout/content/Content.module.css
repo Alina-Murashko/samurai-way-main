@@ -1,0 +1,8 @@
+.content {
+    padding: 10px;
+    grid-area: item_content;
+    background-color: burlywood ;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }

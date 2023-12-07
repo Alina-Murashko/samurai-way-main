@@ -1,17 +1,19 @@
 import React from "react";
+import s from './Sidebar.module.css'
 
-export const Sidebar : React.FC = () => {
+
+type SideBarPropsType = {
+    title : string
+}
+
+const DataSideBar = ["Profile", "News", "Message", "Music"]
+
+export const Sidebar : React.FC<SideBarPropsType> = (props: SideBarPropsType) => {
     return (
-        <header>
-            <nav>
+            <nav className={s.sidebar}>
                 <ul>
-                    <li>Profile</li>
-                    <li>News</li>
-                    <li>Message</li>
-                    <li>Music</li>
+                    <li>{props.title}</li>
                 </ul>
             </nav>
-
-        </header>
     )
 }
