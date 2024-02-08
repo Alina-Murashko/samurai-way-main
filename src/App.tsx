@@ -5,12 +5,33 @@ import { Header } from './layout/header/Header';
 import { Content } from './layout/content/Content';
 
 
+
 export function App() {
+
+  const DataSideBar = [
+    { 
+      name:"Profile",
+      href: ''
+    },
+    {
+      name:"News",
+      href: ''
+    },
+    {
+      name:"Message",
+      href: ''
+    },
+    {
+      name: "Music",
+      href: ''
+    },
+    ]
   return (
         <div className={s.app_wrapper}>
           <Header/>
-          <Sidebar/>
+          <Sidebar dataSidebar={DataSideBar}/>
           <Content/>
+          
         </div>
   );
 }

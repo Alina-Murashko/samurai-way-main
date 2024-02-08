@@ -1,19 +1,29 @@
 import React from "react";
 import s from './Sidebar.module.css'
 
-
-type SideBarPropsType = {
-    title : string
+type SideBarItems = {
+    name: string;
+    href: string;
 }
 
-const DataSideBar = ["Profile", "News", "Message", "Music"]
+type SideBarPropsType = {
+    dataSidebar : SideBarItems[]
+}
+
+
 
 export const Sidebar : React.FC<SideBarPropsType> = (props: SideBarPropsType) => {
+
+    const mapData = props.dataSidebar.map((d,id) => {
+        return (
+            <li key={id}><a href={''}>{d.name}</a></li>
+        )
+    })
+
+
     return (
             <nav className={s.sidebar}>
-                <ul>
-                    <li>{props.title}</li>
-                </ul>
+                <ul>{mapData}</ul>
             </nav>
     )
 }
