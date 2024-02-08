@@ -1,3 +1,8 @@
 .dialogs {
-    background-color: rgb(224, 121, 121);
+    grid-area: item_content;
+    background-color: rgb(171, 139, 139);
+    display: flex;
+    padding: 20px;
+    flex-direction: row;
+    gap:40px;
 }

@@ -10,31 +10,38 @@ type ProfilePageType = {
     posts: Array<PostType>
 }
 
-type DialogsType = {
+export type ChatType = {
     id: number
     name: string
 }
 
-type MessageType = {
+export type DialogType = {
     id: number 
     message: string
 }
 
-type DialogPage = {
-    dialogs: Array<DialogsType>
-    message: Array<MessageType>
+type DataSideBerType = {
+    name: string
+    to: string
 }
 
-type SidebarType = {}
+type DialogPage = {
+    chats: Array<ChatType>
+    dialogs: Array<DialogType>
+}
 
-type RootStateType = {
+type SidebarType = {
+    dataSideBar: DataSideBerType[]
+}
+
+export type RootStateType = {
     profilePage: ProfilePageType
     dialogPage: DialogPage
     sidebar: SidebarType
 
 }
 
-let state : RootStateType = {
+export let state : RootStateType = {
     profilePage: {
         posts: [
             {id: 1, message: "Hi, how are you?",likeCount: 12},
@@ -44,7 +51,7 @@ let state : RootStateType = {
         ]
     },
     dialogPage: {
-        dialogs: [
+        chats: [
             {id: 1, name:"Dimych"},
             {id: 2, name:"Alina"},
             {id: 3, name:"Sasha"},
@@ -52,7 +59,7 @@ let state : RootStateType = {
             {id: 5, name:"Vera"},
             {id: 6, name:"Valeria"},
         ],
-        message : [
+        dialogs : [
             {id: 1, message: "Hi"},
             {id: 2, message: "How is your it-kamasutra?"},
             {id: 3, message: "Yo"},
@@ -61,7 +68,25 @@ let state : RootStateType = {
         ]
         
     },
-
-    sidebar: {}
+    sidebar: {
+            dataSideBar : [
+                { 
+                  name:"Profile",
+                  to: '/profile'
+                },
+                {
+                  name:"Message",
+                  to: '/message'
+                },
+                {
+                  name:"News",
+                  to: '/news'
+                },
+                {
+                  name: "Music",
+                  to: '/music'
+                },
+        ]
+    }
 }
        export default state

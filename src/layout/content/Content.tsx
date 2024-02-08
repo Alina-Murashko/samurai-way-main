@@ -7,9 +7,8 @@ import { Dialogs } from "../dialogs/Dialogs";
 export const Content : React.FC = () => {
     return (
         <section className={s.content}>
-            {/*<Posts/>
-            <Profile/>*/}
-            <Dialogs/>
+            <Posts/>
+            <Profile/>
         </section>
     )
 }

@@ -1,22 +1,16 @@
 import React from "react";
 import s from './Sidebar.module.css'
-
-type SideBarItems = {
-    name: string;
-    href: string;
-}
+import { LinkCastom, SideBarItems } from "../../component/LinkCastom";
 
 type SideBarPropsType = {
     dataSidebar : SideBarItems[]
 }
 
-
-
 export const Sidebar : React.FC<SideBarPropsType> = (props: SideBarPropsType) => {
 
-    const mapData = props.dataSidebar.map((d,id) => {
+    const mapData = props.dataSidebar.map((data,id) => {
         return (
-            <li key={id}><a href={''}>{d.name}</a></li>
+           <li className={s.sidebar_item}key={id}><LinkCastom activeClassName={s.activeClassName} data={data}/></li>
         )
     })
 

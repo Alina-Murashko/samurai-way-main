@@ -1,0 +1,21 @@
+.chat {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    border: 1px black solid;
+    list-style-type: none;
+    & a {
+      text-decoration: none;
+      color: black;
+    }
+    & a:hover {
+      color: pink;
+    }
+    & a.activeClassName {
+      color:rgb(23, 224, 56);
+    }
+}
+
+.activeClassName {
+    border: 1px #42d511 solid;
+}

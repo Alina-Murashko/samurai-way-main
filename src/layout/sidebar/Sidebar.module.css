@@ -2,3 +2,18 @@
     grid-area: item_sidebar;
     background-color: rgb(101, 101, 230);
   }
+
+  .sidebar_item {
+    list-style-type: none;
+    & a {
+      text-decoration: none;
+      color: black;
+    }
+    & a:hover {
+      color: pink;
+    }
+    & a.activeClassName {
+      color:aliceblue;
+    }
+  }
+ 
