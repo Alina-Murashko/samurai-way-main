@@ -1,3 +1,5 @@
 .post {
+    display: flex;
     color: red;
+    gap: 20px;
 }

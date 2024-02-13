@@ -11,6 +11,8 @@ import { RootStateType } from './redax/state';
 
 type AppType = {
   state: RootStateType
+  addPost: () => void
+  newPostOnChange: (symbol: string) => void
 }
 
 
@@ -19,8 +21,11 @@ export function App(props: AppType) {
         <div className={s.app_wrapper}>
           <Header/>
           <Sidebar dataSidebar={props.state.sidebar.dataSideBar}/>
-          <Route path={'/profile'} component={Content}/>
-          <Route path={'/message'} component={Dialogs}/>
+          <Route path={'/profile'} component={() => <Content addPost={props.addPost}
+          newPostOnChange={props.newPostOnChange}
+          dataPosts={props.state.profilePage}
+         />}/>
+          <Route path={'/message'} component={() => <Dialogs dataDialogs={props.state.dialogPage}/>}/>
           <Route path={'/news'} component={NewsFeed}/>
           <Route path={'/music'} component={Musik}/>
         </div>

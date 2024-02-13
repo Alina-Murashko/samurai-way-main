@@ -1,5 +1,4 @@
 
-
 import { ChatType } from '../../redax/state'
 import { Chat } from './Chat'
 import s from './Chats.module.css'
