@@ -1,11 +1,12 @@
-import { rerenderEntireTree } from "./rerender"
+let rerenderEntireTree = (state: RootStateType) => {
+    console.log(state)
+}
 
 export type PostType = {
-    id: number
+    id: string
     message: string
     likeCount: number
 }
-
 
 export type ProfilePageType = {
     posts: Array<PostType>
@@ -13,13 +14,22 @@ export type ProfilePageType = {
 }
 
 export type ChatType = {
-    id: number
+    id: string
     name: string
 }
 
-export type DialogType = {
-    id: number 
+export type MessageType = {
+    id: string
     message: string
+}
+
+export type DialogType = {
+    message: MessageType[]
+    newMessage: string
+}
+
+export type DialogToUser = {
+   [ key:string]: DialogType
 }
 
 type DataSideBerType = {
@@ -29,7 +39,7 @@ type DataSideBerType = {
 
 export type DialogPage = {
     chats: Array<ChatType>
-    dialogs: Array<DialogType>
+    dialogs: DialogToUser
 }
 
 type SidebarType = {
@@ -43,33 +53,46 @@ export type RootStateType = {
 
 }
 
-export let state : RootStateType = {
+export let state: RootStateType  = {
     profilePage: {
         posts: [
-            {id: 1, message: "Hi, how are you?",likeCount: 12},
-            {id: 1, message: "It is my first post?",likeCount: 11},
-            {id: 1, message: "BlaBla",likeCount: 5},
-            {id: 1, message: "Dada",likeCount: 11},
+            {id: '1', message: "Hi, how are you?",likeCount: 12},
+            {id: '1', message: "It is my first post?",likeCount: 11},
+            {id: '1', message: "BlaBla",likeCount: 5},
+            {id: '1', message: "Dada",likeCount: 11},
         ],
         newPost: 'it-incubator'
     },
     dialogPage: {
         chats: [
-            {id: 1, name:"Dimych"},
-            {id: 2, name:"Alina"},
-            {id: 3, name:"Sasha"},
-            {id: 4, name:"Masha"},
-            {id: 5, name:"Vera"},
-            {id: 6, name:"Valeria"},
+            {id: '1kkk', name:"Dimych"},
+            {id: '2kk', name:"Alina"},
+            {id: '3jkj', name:"Sasha"},
+            {id: '499', name:"Masha"},
+            {id: '5hh', name:"Vera"},
         ],
-        dialogs : [
-            {id: 1, message: "Hi"},
-            {id: 2, message: "How is your it-kamasutra?"},
-            {id: 3, message: "Yo"},
-            {id: 4, message: "Yo"},
-            {id: 5, message: "Hi!!!"},
-        ]
-        
+        dialogs : {
+            ['1kkk']: {
+                message:[{id:'1', message: "How is your it-kamasutra?"},
+                  {id:'2',message: "ok!"}],
+                newMessage:''},
+            ['2kk']: {
+                message:[{id:'1', message: "How are you"},
+                  {id:'2',message: "ok!"}],
+                newMessage: ''},
+            ['3jkj']: {
+                message:[{id:'1', message: "Let's go for a walk"},
+                  {id:'2',message: "ok!"}],
+                newMessage: ''},
+            ['499']: {
+                message: [{id:'1', message: "Will you eat"},
+                  {id:'2', message: "ok!"}],
+                newMessage: ''},
+            ['5hh']: {
+                message: [{id:'1',message: "Hi!"},
+                {id:'2',message: "Hi!"}],
+                newMessage: ''}
+        }
     },
     sidebar: {
             dataSideBar : [
@@ -92,23 +115,50 @@ export let state : RootStateType = {
         ]
     }
 }
-       
+
+export const subscribe = (observer: (state:RootStateType) => void) => {
+    rerenderEntireTree = observer
+}
+
 export const addPost = () => {
     const post: PostType = {
-        id: new Date().getDate() ,
+        id:'ggghjkk' ,
         message: state.profilePage.newPost,
         likeCount: 0
     }
     state.profilePage.posts.push(post);
     state.profilePage.newPost='';
     rerenderEntireTree(state)
+
 }
 
-export const newPostOnChange = (symbol: string) => {
-    debugger
-    state.profilePage.newPost = symbol
+export const changeNewPost = (symb: string) => {
+    state.profilePage.newPost = symb
     rerenderEntireTree(state)
 }
+
+export const addNewMessage = (chatId: string) => {
+    const newMessage: MessageType= {
+        id: 'dfgggd',
+        message: state.dialogPage.dialogs['1kkk'].newMessage
+    }
+    state.dialogPage.dialogs[chatId].message.push(newMessage);
+    state.dialogPage.dialogs[chatId].newMessage = ''
+    rerenderEntireTree(state)
+
+}
+
+export const changeNewMessage = (symb: string,chatId: string) => {
+    state.dialogPage.dialogs[chatId].newMessage = symb
+    rerenderEntireTree(state)
+}
+
+export const store: any = {
+    _state: state,
+    addPost 
+
+}
+
 
 
 

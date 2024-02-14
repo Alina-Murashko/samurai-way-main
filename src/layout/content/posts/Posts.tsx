@@ -7,19 +7,17 @@ import s from "./Posts.module.css";
 type PostsType = {
     dataPosts: PostType[]
     addPost: () => void
-    newPostOnChange: (symbol: string) => void
+    changeNewPost: (symb: string) => void
     newPostText: string
 }
 
 export const Posts : React.FC<PostsType> = (props) => {
 
-    const newPostCreateRef = React.createRef<HTMLTextAreaElement>();
-    
-    const onChangeHandler = () => {
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         debugger
-        const symbol = newPostCreateRef.current?.value;
+        const symbol = e.currentTarget.value
         if(symbol) {
-            props.newPostOnChange(symbol)
+            props.changeNewPost(symbol)
         }
         
     }
@@ -31,10 +29,9 @@ export const Posts : React.FC<PostsType> = (props) => {
     return (  
             <div className={s.posts}>
                 <div> 
-                <textarea ref={newPostCreateRef} value={props.newPostText} onChange={onChangeHandler}/>
-                <button onClick={onClickHandler}>'+ </button>
+                <textarea  value={props.newPostText} onChange={onChangeHandler}/>
+                <button onClick={onClickHandler}>+</button>
                 </div>
-               
                 <div className={s.posts_container}>
                 { props.dataPosts.map((item) => {
                     return (

@@ -1,25 +1,34 @@
-import React from 'react'
-import { DialogType } from '../../redax/state'
+import React, { ChangeEvent } from 'react'
+import { MessageType } from '../../redax/state'
 import s from './ChatsDialogs.module.css'
+import { MessageInDialogsType } from './MessageInDialogs'
+
 
 type ChatsDialogs = {
-   dialogs: DialogType[]
+   dialogs:  MessageType[]
+   newMessage: string
+   changeNewMessage: (symb: string,chatId: string) => void
+   addNewMessage: (chatId: string) => void
+   chatId: string
 }
 
 export const ChatsDialogs = (props: ChatsDialogs) => {
 
-    const newMessageCreateRef = React.createRef<HTMLTextAreaElement>();
-
     const onClickHandler = () => {
-        alert(newMessageCreateRef.current?.value)
+      props.addNewMessage(props.chatId)
+    }
+
+    const onChangeHandker = (e: ChangeEvent<HTMLInputElement>) => {
+        const message = e.currentTarget.value;
+        props.changeNewMessage(message,props.chatId)
     }
 
     return (
         <div className={s.chatDialogs}>
             <div>{props.dialogs.map(el => {
-                return <span>{el.message}</span>
+                return <MessageInDialogsType key={el.id} message={el.message}/>
             })}</div>
-            <input className={s.input}/><button onClick={onClickHandler}>'+'</button>
+            <input className={s.input} value={props.newMessage} onChange={onChangeHandker}/><button onClick={onClickHandler}>'+'</button>
         </div>
 
     )
