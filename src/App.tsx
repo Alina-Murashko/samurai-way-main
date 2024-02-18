@@ -7,14 +7,12 @@ import { Dialogs } from './layout/dialogs/Dialogs';
 import { Route } from 'react-router-dom';
 import { NewsFeed } from './layout/news/NewsFeed';
 import { Musik } from './layout/music/Musik';
-import { RootStateType, addNewMessage } from './redax/state';
+import { ActionType, RootStateType } from './redax/store';
+
 
 type AppType = {
   state: RootStateType
-  addPost: () => void
-  addNewMessage: (chatId: string) => void
-  changeNewPost: (symb: string) => void
-  changeNewMessage: (symb: string,chatId: string) => void
+  dispatch: (action:ActionType) => void
 }
 
 
@@ -23,12 +21,8 @@ export function App(props: AppType) {
         <div className={s.app_wrapper}>
           <Header/>
           <Sidebar dataSidebar={props.state.sidebar.dataSideBar}/>
-          <Route path={'/profile'} render={() => <Content addPost={props.addPost}
-          changeNewPost={props.changeNewPost}
-          dataPosts={props.state.profilePage}
-         />}/>
-          <Route path={'/message'} render={() => <Dialogs dataDialogs={props.state.dialogPage}
-          changeNewMessage={props.changeNewMessage} addNewMessage={props.addNewMessage}/>}/>
+          <Route path={'/profile'} render={() => <Content dispatch={props.dispatch} dataPosts={props.state.profilePage}/>}/>
+          <Route path={'/message'} render={() => <Dialogs dataDialogs={props.state.dialogPage} dispatch={props.dispatch}/>}/>
           <Route path={'/news'} render={() => <NewsFeed/>}/>
           <Route path={'/music'} render={() => <Musik/>}/>
         </div>

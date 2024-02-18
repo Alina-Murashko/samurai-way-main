@@ -1,12 +1,11 @@
-import { DialogPage } from "../../redax/state"
+import { ActionType, DialogPage } from "../../redax/state"
 import { Chats } from "./Chats"
 import { ChatsDialogs } from "./ChatsDialogs"
 import s from "./Dialogs.module.css"
 
 type  DialogPageType = {
     dataDialogs: DialogPage
-    changeNewMessage: (symb: string,chatId: string) => void
-    addNewMessage:(chatId: string) => void
+    dispatch: (action:ActionType) => void
 }
 
 export const Dialogs:React.FC<DialogPageType> = (props) => { 
@@ -15,10 +14,9 @@ export const Dialogs:React.FC<DialogPageType> = (props) => {
         <div className={s.dialogs}>
             <Chats chats={props.dataDialogs.chats}/>
             <ChatsDialogs dialogs={props.dataDialogs.dialogs[chatId].message} 
+            newMessage={props.dataDialogs.dialogs[chatId].newMessage}
             chatId={chatId}
-            changeNewMessage={props.changeNewMessage}
-            newMessage={props.dataDialogs.dialogs['1kkk'].newMessage}
-            addNewMessage={props.addNewMessage}
+            dispatch={props.dispatch}
             />
         </div>
     )

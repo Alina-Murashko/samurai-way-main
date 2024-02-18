@@ -1,29 +1,25 @@
-import React, { ChangeEvent, useRef } from "react";
-import { PostType } from "../../../redax/state";
+import React, { ChangeEvent } from "react";
+import { ActionType, PostType } from "../../../redax/state";
 import { Post } from "./post/Post";
 import s from "./Posts.module.css";
+import { actionCreaterAddPost, actionCreaterChengeNewPost } from "../../../redax/profilePageReducer";
 
 
 type PostsType = {
     dataPosts: PostType[]
-    addPost: () => void
-    changeNewPost: (symb: string) => void
     newPostText: string
+    dispatch:( action: ActionType) => void
 }
 
 export const Posts : React.FC<PostsType> = (props) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        debugger
         const symbol = e.currentTarget.value
-        if(symbol) {
-            props.changeNewPost(symbol)
-        }
-        
+        props.dispatch(actionCreaterChengeNewPost(symbol));
     }
 
     const onClickHandler = () => {
-        props.addPost() 
+       props.dispatch(actionCreaterAddPost())
     }
 
     return (  

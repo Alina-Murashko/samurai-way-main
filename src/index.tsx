@@ -2,19 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
-import state, { RootStateType, addNewMessage, addPost, changeNewMessage, changeNewPost, subscribe } from './redax/state';
+import { store, storeType } from './redax/store';
 
 
-export const rerenderEntireTree = (state: RootStateType) => {
-    debugger
+
+
+export const rerenderEntireTree = (store: storeType) => {
     ReactDOM.render(
     <BrowserRouter>
-    <App state={state} addPost={addPost} changeNewPost={changeNewPost} 
-    changeNewMessage={changeNewMessage} addNewMessage={addNewMessage}/>
+    <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
     </BrowserRouter>,
     document.getElementById('root')
 )};
 
-rerenderEntireTree(state)
+rerenderEntireTree(store)
 
-subscribe(rerenderEntireTree)
+store.subscribe(rerenderEntireTree)

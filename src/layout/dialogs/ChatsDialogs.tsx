@@ -1,26 +1,26 @@
 import React, { ChangeEvent } from 'react'
-import { MessageType } from '../../redax/state'
+import { ActionType, MessageType } from '../../redax/state'
 import s from './ChatsDialogs.module.css'
 import { MessageInDialogsType } from './MessageInDialogs'
+import { actionCreaterAddMessage, actionCreaterChengeNewMessage } from '../../redax/dialogPageReducer'
 
 
 type ChatsDialogs = {
    dialogs:  MessageType[]
    newMessage: string
-   changeNewMessage: (symb: string,chatId: string) => void
-   addNewMessage: (chatId: string) => void
+   dispatch: (action: ActionType) => void
    chatId: string
 }
 
 export const ChatsDialogs = (props: ChatsDialogs) => {
 
     const onClickHandler = () => {
-      props.addNewMessage(props.chatId)
+      props.dispatch(actionCreaterAddMessage(props.chatId))
     }
 
-    const onChangeHandker = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const message = e.currentTarget.value;
-        props.changeNewMessage(message,props.chatId)
+        props.dispatch(actionCreaterChengeNewMessage(props.chatId,message))
     }
 
     return (
@@ -28,7 +28,7 @@ export const ChatsDialogs = (props: ChatsDialogs) => {
             <div>{props.dialogs.map(el => {
                 return <MessageInDialogsType key={el.id} message={el.message}/>
             })}</div>
-            <input className={s.input} value={props.newMessage} onChange={onChangeHandker}/><button onClick={onClickHandler}>'+'</button>
+            <input className={s.input} value={props.newMessage} onChange={onChangeHandler}/><button onClick={onClickHandler}>'+'</button>
         </div>
 
     )
